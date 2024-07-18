@@ -19,7 +19,9 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/constants/firebaseConfig";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/configureStore";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import HomeIcon from "@mui/icons-material/Home";
+import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
 import {
     getRefreshToken,
     saveAccessToken,
@@ -44,6 +46,7 @@ const DashboardFeature = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
+    const currentTab = usePathname();
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -232,6 +235,40 @@ const DashboardFeature = () => {
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
+            <MenuItem onClick={() => router.push("/")}>
+                <IconButton
+                    size="large"
+                    aria-label="Home"
+                    aria-controls="primary-search-home-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <HomeIcon
+                        className={`w-8 h-8 ${
+                            currentTab === "/" ? "text-secondary" : ""
+                        }`}
+                    />
+                </IconButton>
+                <p>Home</p>
+            </MenuItem>
+            <MenuItem onClick={() => router.push("/friends")}>
+                <IconButton
+                    size="large"
+                    aria-label="friend"
+                    aria-controls="primary-search-friend-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <PeopleOutlineRoundedIcon
+                        className={`w-8 h-8 ${
+                            currentTab.includes("/friends")
+                                ? "text-secondary"
+                                : ""
+                        }`}
+                    />
+                </IconButton>
+                <p>Friend</p>
+            </MenuItem>
         </Menu>
     );
 
@@ -261,7 +298,6 @@ const DashboardFeature = () => {
                 }
             );
 
-            // Clean up the listener when the component unmounts
             return () => unsubscribe();
         };
 

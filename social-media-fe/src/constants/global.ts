@@ -1,7 +1,7 @@
 export const HOST_NAME = "localhost";
 export const API_BASE_URL = `https://gateway-7pd7.onrender.com/`;
 
-export const APP_BASE_URL = `https://${HOST_NAME}:3000`;
+export const APP_BASE_URL = `https://social-media-web-app-beige.vercel.app`;
 
 export const SOCKET_URL = `https://gateway-7pd7.onrender.com/websocket/ws`;
 

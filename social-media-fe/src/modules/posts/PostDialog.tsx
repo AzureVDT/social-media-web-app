@@ -19,7 +19,6 @@ import {
     setOpenPostDialog,
     setPosts,
     setReplyComment,
-    setTriggerFetchingPost,
 } from "@/store/actions/postSlice";
 import { RootState } from "@/store/configureStore";
 import useClickOutSide from "@/hooks/useClickOutSide";
@@ -61,7 +60,8 @@ const PostDialog = ({
     const [storedPostReaction, setStoredPostReaction] = useState<{
         [key: string]: number;
     }>({});
-    console.log("storedPostReaction:", storedPostReaction);
+    const isMobile = useSelector((state: RootState) => state.common.isMobile);
+    console.log("isMobile:", isMobile);
     const [openTagPeopleDialog, setOpenTagPeopleDialog] = React.useState(false);
     const replyComment = useSelector(
         (state: RootState) => state.post.replyComment
@@ -276,7 +276,6 @@ const PostDialog = ({
     useEffect(() => {
         fetchComments();
     }, [fetchComments]);
-
     const handleSortChange = (event: SelectChangeEvent<string>) => {
         setSortStrategy(event.target.value);
         setPage(1);
@@ -362,10 +361,21 @@ const PostDialog = ({
                     setSelectedPersons={setTaggedPersons}
                 ></TagPeopleDialogContent>
             ) : (
-                <DialogContent dividers className="w-[700px] h-full p-4">
+                <DialogContent
+                    dividers
+                    sx={{
+                        width: {
+                            xs: "300px",
+                            md: "700px",
+                        },
+                        height: "100%",
+                        padding: 4,
+                    }}
+                >
                     <Post
                         data={post}
                         setStoredPostReaction={setStoredPostReaction}
+                        type={isMobile ? "responsive" : "post"}
                     ></Post>
                     <CommentSort
                         sortStrategy={sortStrategy}

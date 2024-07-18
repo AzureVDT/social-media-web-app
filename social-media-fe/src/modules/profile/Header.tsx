@@ -18,6 +18,7 @@ import { DEFAULT_AVATAR, DEFAULT_COVER } from "@/constants/global";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { FriendRequestData } from "@/types/userType";
 const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
+    const isMobile = useSelector((state: RootState) => state.common.isMobile);
     const router = useRouter();
     const relationshipUsers = useSelector(
         (state: RootState) => state.user.relationshipUsers
@@ -53,8 +54,8 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                     <Image
                                         src={data.cover || DEFAULT_COVER}
                                         width={1095}
-                                        height={500}
-                                        className="max-w-[1095px] h-[500px] rounded-lg object-cover cursor-pointer"
+                                        height={isMobile ? 375 : 500}
+                                        className="max-w-[1095px] w-full md:h-[500px] h-[375px] rounded-lg object-cover cursor-pointer"
                                         alt="profile"
                                     ></Image>
                                 </PhotoView>
@@ -83,7 +84,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                         src={data.image_url}
                                         width={168}
                                         height={168}
-                                        className="cursor-pointer w-[168px] h-[168px] object-cover rounded-full absolute bottom-[-140px] left-8"
+                                        className="cursor-pointer w-[142px] h-[142px] md:w-[168px] md:h-[168px] object-cover rounded-full absolute md:bottom-[-140px] bottom-[-80px] left-8"
                                         alt="profile"
                                     ></Image>
                                 </PhotoView>
@@ -92,7 +93,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                 <IconButton
                                     color="info"
                                     size="medium"
-                                    className="absolute bottom-[-140px] left-[140px] bg-grayf3 hover:bg-lite"
+                                    className="absolute md:bottom-[-140px] bottom-[-80px] left-[140px] bg-grayf3 hover:bg-lite"
                                     onClick={() =>
                                         seOpenUpdateAvatarDialog(true)
                                     }
@@ -102,7 +103,11 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                             )}
                         </div>
                     </div>
-                    <div className="ml-[220px] mt-3 mb-4 flex items-center justify-between">
+                    <div
+                        className={`md:ml-[220px] ml-4 md:mt-3 mt-20 mb-4 md:flex items-center justify-between ${
+                            isMobile ? "flex-col" : ""
+                        }`}
+                    >
                         <div>
                             <Typography variant="h4" className="font-bold">
                                 {data.name}
@@ -114,7 +119,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                         : `${count} friends`}
                                 </span>
                             </Link>
-                            <div className="flex items-center justify-start mt-3 ">
+                            <div className="flex items-center justify-start mt-3">
                                 {type === "user" &&
                                     Array.from({ length: 5 }).map(
                                         (_, index) => (
@@ -153,7 +158,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                     ))}
                             </div>
                         </div>
-                        <div className="flex items-center justify-center gap-x-2">
+                        <div className="flex items-center md:justify-center gap-x-2">
                             {type === "me" && (
                                 <>
                                     <Button
@@ -188,7 +193,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                     type="button"
                                     variant="contained"
                                     color="info"
-                                    className="normal-case"
+                                    className="mt-2 normal-case"
                                     onClick={handleFollow}
                                     disabled={loading}
                                 >
@@ -231,54 +236,60 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                     Friends
                                 </Typography>
                             </button>
-                            <button
-                                className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
+                            {isMobile ? (
+                                <div></div>
+                            ) : (
+                                <>
+                                    <button
+                                        className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
                     flex-shrink-0 ${
                         currentTab === 3
                             ? "border-b-4 border-secondary text-secondary"
                             : "hover:bg-text8 hover:bg-opacity-20 hover:rounded-md text-text8"
                     }`}
-                            >
-                                <Typography className="font-semibold">
-                                    Photos
-                                </Typography>
-                            </button>
-                            <button
-                                className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
+                                    >
+                                        <Typography className="font-semibold">
+                                            Photos
+                                        </Typography>
+                                    </button>
+                                    <button
+                                        className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
                     flex-shrink-0 ${
                         currentTab === 4
                             ? "border-b-4 border-secondary text-secondary"
                             : "hover:bg-text8 hover:bg-opacity-20 hover:rounded-md text-text8"
                     }`}
-                            >
-                                <Typography className="font-semibold">
-                                    Videos
-                                </Typography>
-                            </button>
-                            <button
-                                className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
+                                    >
+                                        <Typography className="font-semibold">
+                                            Videos
+                                        </Typography>
+                                    </button>
+                                    <button
+                                        className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
                     flex-shrink-0 ${
                         currentTab === 5
                             ? "border-b-4 border-secondary text-secondary"
                             : "hover:bg-text8 hover:bg-opacity-20 hover:rounded-md text-text8"
                     }`}
-                            >
-                                <Typography className="font-semibold">
-                                    Check-ins
-                                </Typography>
-                            </button>
-                            <button
-                                className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
+                                    >
+                                        <Typography className="font-semibold">
+                                            Check-ins
+                                        </Typography>
+                                    </button>
+                                    <button
+                                        className={`flex items-center justify-center w-full max-w-[100px] h-[60px] 
                     flex-shrink-0 ${
                         currentTab === 6
                             ? "border-b-4 border-secondary text-secondary"
                             : "hover:bg-text8 hover:bg-opacity-20 hover:rounded-md text-text8"
                     }`}
-                            >
-                                <Typography className="font-semibold">
-                                    More
-                                </Typography>
-                            </button>
+                                    >
+                                        <Typography className="font-semibold">
+                                            More
+                                        </Typography>
+                                    </button>
+                                </>
+                            )}
                         </div>
                         <Button
                             type="button"

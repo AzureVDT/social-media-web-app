@@ -115,8 +115,6 @@ const PostComment = ({ data }: { data: CommentData }) => {
         fetchPostReactions();
     }, [fetchPostReactions]);
 
-    // Rest of your component code
-
     const handleCalculateTotalReaction = useMemo(() => {
         return Object.keys(postReaction).reduce((total, key) => {
             return total + postReaction[key];
@@ -221,7 +219,10 @@ const PostComment = ({ data }: { data: CommentData }) => {
                             <ReplyOutlinedIcon fontSize="small" />
                         </IconButton>
                         <Tooltip title={formatTime(data.create_at)}>
-                            <Typography variant="caption">
+                            <Typography
+                                variant="caption"
+                                className="flex-shrink-0"
+                            >
                                 {formatOnlineTime(data.create_at)} ago
                             </Typography>
                         </Tooltip>
@@ -251,7 +252,6 @@ const PostComment = ({ data }: { data: CommentData }) => {
                             </Typography>
                         </Button>
                     </Box>
-                    {/* Render child comments */}
                     {data.child_comments && data.child_comments.length > 0 && (
                         <Box className="mt-2">
                             {renderChildComments(data.child_comments)}
