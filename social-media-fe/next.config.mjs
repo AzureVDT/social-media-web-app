@@ -8,6 +8,11 @@ const nextConfig = {
                 hostname: "res.cloudinary.com",
                 pathname: "/didg9rn2d/**",
             },
+            {
+                protocol: "https",
+                hostname: "encrypted-tbn0.gstatic.com",
+                pathname: "/**",
+            },
         ],
     },
     headers: async () => {

@@ -54,7 +54,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                         src={data.cover || DEFAULT_COVER}
                                         width={1095}
                                         height={500}
-                                        className="max-w-[1095px] h-[500px] rounded-lg object-cover"
+                                        className="max-w-[1095px] h-[500px] rounded-lg object-cover cursor-pointer"
                                         alt="profile"
                                     ></Image>
                                 </PhotoView>
@@ -83,7 +83,7 @@ const Header = ({ data, type = "me" }: { data: Member; type?: string }) => {
                                         src={data.image_url}
                                         width={168}
                                         height={168}
-                                        className="w-[168px] h-[168px] object-cover rounded-full absolute bottom-[-140px] left-8"
+                                        className="cursor-pointer w-[168px] h-[168px] object-cover rounded-full absolute bottom-[-140px] left-8"
                                         alt="profile"
                                     ></Image>
                                 </PhotoView>

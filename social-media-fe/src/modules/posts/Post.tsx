@@ -97,7 +97,6 @@ const Post = ({
 
     useEffect(() => {
         async function fetchPostReactions() {
-            console.log("Run fetchPostReactions");
             const response = await handleGetPostReactionDetail(data.post_id);
             if (response) {
                 const reaction = Object.keys(response).find((key) => {

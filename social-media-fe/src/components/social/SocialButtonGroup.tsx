@@ -15,7 +15,7 @@ const SocialButtonGroup = () => {
                 gap: 2,
             }}
         >
-            <Grid item>
+            <Grid item className="w-full max-w-[250px]">
                 <Button
                     variant="outlined"
                     href={GOOGLE_AUTH_URL}
@@ -36,29 +36,6 @@ const SocialButtonGroup = () => {
                 >
                     <GoogleIcon />
                     <span>Google</span>
-                </Button>
-            </Grid>
-            <Grid item>
-                <Button
-                    variant="outlined"
-                    href={FACEBOOK_AUTH_URL}
-                    title="Facebook"
-                    sx={{
-                        px: 4,
-                        textTransform: "none",
-                        backgroundColor: "#fff",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 1,
-                        ":hover": {
-                            backgroundColor: "secondary.main",
-                            color: "white",
-                        },
-                    }}
-                >
-                    <FacebookIcon />
-                    <span>Facebook</span>
                 </Button>
             </Grid>
         </Grid>

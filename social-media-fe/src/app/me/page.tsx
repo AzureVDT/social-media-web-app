@@ -100,7 +100,7 @@ const Profile = () => {
                                 <ListFriend></ListFriend>
                             </Grid>
                             <Grid item md={7} xs={12} className="flex flex-col">
-                                <div className="overflow-x-hidden overflow-y-auto basis-0 grow">
+                                <div className="overflow-x-hidden basis-0 grow">
                                     <PostHeader></PostHeader>
                                     <PostFilter></PostFilter>
                                     <Grid container columnGap={20}>
