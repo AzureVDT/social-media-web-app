@@ -34,6 +34,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { SOCIAL_MEDIA_API } from "@/apis/constants";
 import ResetPasswordDialog from "../profile/ResetPasswordDialog";
 import NotificationModal from "@/components/modal/NotificationModal";
+import ProfileMenu from "@/components/common/ProfileMenu";
 const DashboardFeature = () => {
     const router = useRouter();
     const currentUserProfile = useSelector(
@@ -223,18 +224,47 @@ const DashboardFeature = () => {
                 )}
             </PopupState>
 
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle />
-                </IconButton>
-                <p>Profile</p>
-            </MenuItem>
+            <PopupState
+                variant="popover"
+                popupId="profile-popup-popover-mobile"
+            >
+                {(popupState) => (
+                    <>
+                        <MenuItem {...bindTrigger(popupState)}>
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="primary-search-account-menu"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                            <p>Profile</p>
+                        </MenuItem>
+                        <Popover
+                            {...bindPopover(popupState)}
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "center",
+                            }}
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "center",
+                            }}
+                        >
+                            <ProfileMenu
+                                popupState={popupState}
+                                setOpenResetPasswordDialog={
+                                    setOpenResetPasswordDialog
+                                }
+                                handleLogout={handleLogout}
+                            ></ProfileMenu>
+                        </Popover>
+                    </>
+                )}
+            </PopupState>
+
             <MenuItem onClick={() => router.push("/")}>
                 <IconButton
                     size="large"

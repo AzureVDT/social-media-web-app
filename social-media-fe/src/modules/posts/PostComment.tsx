@@ -27,7 +27,6 @@ import ViewPostReactionDialog from "./ViewPostReactionDialog";
 import { setReplyComment } from "@/store/actions/postSlice";
 
 const PostComment = ({ data }: { data: CommentData }) => {
-    console.log("Render PostComment");
     const dispatch = useDispatch();
     const currentUserProfile = useSelector(
         (state: RootState) => state.profile.currentUserProfile

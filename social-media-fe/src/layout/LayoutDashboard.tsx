@@ -66,7 +66,7 @@ const LayoutDashboard = ({ children }: { children: React.ReactNode }) => {
                 <div className="relative w-full h-full min-h-screen overflow-x-hidden overflow-y-auto bg-strock">
                     <DashboardTopBar></DashboardTopBar>
                     {showChatModal && (
-                        <div className="fixed bottom-0 z-50 rounded-lg shadow-md right-14 bg-lite">
+                        <div className="fixed bottom-0 right-0 z-50 rounded-lg shadow-md md:right-14 bg-lite">
                             <ChatModal></ChatModal>
                         </div>
                     )}

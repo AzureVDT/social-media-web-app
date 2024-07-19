@@ -61,7 +61,6 @@ const PostDialog = ({
         [key: string]: number;
     }>({});
     const isMobile = useSelector((state: RootState) => state.common.isMobile);
-    console.log("isMobile:", isMobile);
     const [openTagPeopleDialog, setOpenTagPeopleDialog] = React.useState(false);
     const replyComment = useSelector(
         (state: RootState) => state.post.replyComment
@@ -101,12 +100,6 @@ const PostDialog = ({
         authors = post.authors[0].name;
     }
 
-    const {
-        show: showEmojiPicker,
-        setShow: setShowEmojiPicker,
-        nodeRef: emojiPickerRef,
-    } = useClickOutSide();
-
     const handleClose = () => {
         dispatch(setOpenPostDialog(false));
         const newPosts = {
@@ -121,7 +114,6 @@ const PostDialog = ({
 
     const handleChooseEmoji = (emoji: any) => {
         setContent((prev) => prev + emoji.native);
-        setShowEmojiPicker(false);
     };
 
     const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -365,7 +357,7 @@ const PostDialog = ({
                     dividers
                     sx={{
                         width: {
-                            xs: "300px",
+                            xs: "324px",
                             md: "700px",
                         },
                         height: "100%",
@@ -435,12 +427,9 @@ const PostDialog = ({
                     setContent={setContent}
                     currentUserProfile={currentUserProfile}
                     onCreateComment={onCreateComment}
-                    showEmojiPicker={showEmojiPicker}
-                    setShowEmojiPicker={setShowEmojiPicker}
                     handleChooseEmoji={handleChooseEmoji}
                     handleFileInputClick={handleFileInputClick}
                     fileInputRef={fileInputRef}
-                    emojiPickerRef={emojiPickerRef}
                     loading={loading}
                     setOpenTagPeopleDialog={setOpenTagPeopleDialog}
                 ></PostDialogAction>

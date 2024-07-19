@@ -39,6 +39,7 @@ const Profile = () => {
         (state: RootState) => state.post.currentPostData
     );
     const [postLoading, setPostLoading] = React.useState(false);
+    console.log("Profile ~ postLoading:", postLoading);
     const [page, setPage] = React.useState<number>(1);
     const [isEndedList, setIsEndedList] = React.useState<boolean>(false);
     const observer = useRef<IntersectionObserver | null>(null);
@@ -114,7 +115,7 @@ const Profile = () => {
                                     {!isMobile && <PostFilter></PostFilter>}
                                     <Grid container columnGap={20}>
                                         {!postLoading &&
-                                        Object.keys(userPosts).length > 0 ? (
+                                            Object.keys(userPosts).length > 0 &&
                                             Object.values(userPosts).map(
                                                 (post: PostData) => (
                                                     <Grid
@@ -127,31 +128,34 @@ const Profile = () => {
                                                         ></Post>
                                                     </Grid>
                                                 )
-                                            )
-                                        ) : (
-                                            <Grid
-                                                item
-                                                className="w-full h-full"
-                                            >
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        justifyContent:
-                                                            "center",
-                                                        alignItems: "center",
-                                                        height: "100%",
-                                                        mt: 2,
-                                                    }}
+                                            )}
+                                        {!postLoading &&
+                                            Object.keys(userPosts).length ===
+                                                0 && (
+                                                <Grid
+                                                    item
+                                                    className="w-full h-full"
                                                 >
-                                                    <Typography
-                                                        variant="h5"
-                                                        className="font-semibold"
+                                                    <Box
+                                                        sx={{
+                                                            display: "flex",
+                                                            justifyContent:
+                                                                "center",
+                                                            alignItems:
+                                                                "center",
+                                                            height: "100%",
+                                                            mt: 2,
+                                                        }}
                                                     >
-                                                        No post
-                                                    </Typography>
-                                                </Box>
-                                            </Grid>
-                                        )}
+                                                        <Typography
+                                                            variant="h5"
+                                                            className="font-semibold"
+                                                        >
+                                                            No post
+                                                        </Typography>
+                                                    </Box>
+                                                </Grid>
+                                            )}
                                     </Grid>
                                     {postLoading && (
                                         <Box
