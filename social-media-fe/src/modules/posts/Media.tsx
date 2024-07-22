@@ -21,7 +21,7 @@ const Media = ({ media }: { media: string[] }) => {
                                     layout="fill"
                                     sizes="100%"
                                     style={{
-                                        objectFit: "cover",
+                                        objectFit: "contain",
                                         width: "100%",
                                         height: "100%",
                                     }}
